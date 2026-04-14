@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "316538328306",
+    "project_id": "kineticgear-aa36d",
+    "storage_bucket": "kineticgear-aa36d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316538328306:android:722bda62dc57dc0af1ec6b",
+        "android_client_info": {
+          "package_name": "com.example.kineticgear2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBApJcGVzsomf2f-aklqO54TtlHZyEF83U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

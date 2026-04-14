@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#FFFFFF">
+
+<RelativeLayout
+    android:id="@+id/userHeader"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="#D32F2F"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="User Management"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</RelativeLayout>
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvUserList"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:padding="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/userHeader" />
+
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btnAddUser"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    android:src="@android:drawable/ic_input_add"
+    app:backgroundTint="#D32F2F"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:tint="#FFFFFF" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

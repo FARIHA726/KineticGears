@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FDEAEA"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@android:drawable/checkbox_on_background"
+            app:tint="#D32F2F" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Quality Assurance"
+            android:textColor="#212121"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/nav_pending_inspections"
+                style="@style/SidebarItem"
+                android:drawableStart="@android:drawable/ic_menu_agenda"
+                android:drawablePadding="16dp"
+                android:text="Pending Inspections" />
+
+            <TextView
+                android:id="@+id/nav_defect_log"
+                style="@style/SidebarItem"
+                android:drawableStart="@android:drawable/stat_sys_warning"
+                android:drawablePadding="16dp"
+                android:text="Defect Master Log" />
+
+            <TextView
+                android:id="@+id/nav_ncr_summary"
+                style="@style/SidebarItem"
+                android:drawableStart="@android:drawable/ic_menu_recent_history"
+                android:drawablePadding="16dp"
+                android:text="NCR Summary" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

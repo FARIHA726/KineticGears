@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDE7E6"
+        android:padding="15dp"
+        android:text="Dashboard"
+        android:textColor="#B03A2E"
+        android:textStyle="bold" />
+
+    <TextView style="@style/SidebarItem" android:text="Inventory" />
+    <TextView style="@style/SidebarItem" android:text="Settings" />
+    <TextView style="@style/SidebarItem" android:text="System Logs" />
+
+    <TextView
+        android:id="@+id/btnToggleTheme"
+        style="@style/SidebarItem"
+        android:drawableStart="@android:drawable/ic_menu_day"
+        android:drawablePadding="16dp"
+        android:text="Switch to Dark Mode" />
+
+    <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnSurveillance"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="#B03A2E"
+        android:text="SURVEILLANCE"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
