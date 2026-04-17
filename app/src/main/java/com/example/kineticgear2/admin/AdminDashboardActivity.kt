@@ -12,37 +12,48 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.kineticgear2.R
 import com.example.kineticgear2.authentication.LoginActivity
-import com.example.kineticgear2.utils.ThemeManager // IMPORT YOUR THEME MANAGER
+import com.example.kineticgear2.utils.ThemeManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 
 class AdminDashboardActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var themeManager: ThemeManager // 1. Declare ThemeManager
+    private lateinit var themeManager: ThemeManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // 2. Initialize and apply the theme BEFORE setting the content view
+        // Initialize and apply the theme BEFORE setting the content view
         themeManager = ThemeManager(this)
         themeManager.applySavedTheme()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_dashboard)
 
-        // 3. Drawer & Sidebar Logic
+        // Drawer & Sidebar Logic
         drawerLayout = findViewById(R.id.drawerLayout)
         val btnMenu = findViewById<ImageView>(R.id.btnMenu)
-        val btnSurveillance = findViewById<Button>(R.id.btnSurveillance)
+
+        // Find views inside the navigation view safely
+        val navView = findViewById<NavigationView>(R.id.navView)
+        val btnSurveillance = navView.findViewById<Button>(R.id.btnSurveillance)
+
+        // --- FIXED LOGOUT LOGIC ---
+        // Find the Logout button INSIDE the navigation view, not the main layout
+        val tvLogout = navView.findViewById<TextView>(R.id.tvLogout)
 
         btnMenu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
-        // 4. Header & Floating Actions
-        val tvLogout = findViewById<TextView>(R.id.tvLogout)
+        // Floating Action Button
         val fabChat = findViewById<FloatingActionButton>(R.id.fabChat)
 
-        tvLogout.setOnClickListener {
+        // Apply safe call (?) to prevent NullPointerException
+        tvLogout?.setOnClickListener {
+            // Close the drawer smoothly before logging out
+            drawerLayout.closeDrawer(GravityCompat.START)
+
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -50,7 +61,7 @@ class AdminDashboardActivity : AppCompatActivity() {
             finish()
         }
 
-        btnSurveillance.setOnClickListener {
+        btnSurveillance?.setOnClickListener {
             showSimpleDialog("Surveillance System", "Accessing industrial camera feed...")
             drawerLayout.closeDrawer(GravityCompat.START)
         }
@@ -59,28 +70,42 @@ class AdminDashboardActivity : AppCompatActivity() {
             showSimpleDialog("Support Chatbot", "Hello! I am your industrial assistant.")
         }
 
-        // 5. Setup the Modules and Theme Toggle
+        // Setup the Modules and Theme Toggle
         setupUserManagement()
         setupWorkOrders()
         setupReports()
-        setupThemeToggle() // Trigger the dark mode logic
+        setupThemeToggle()
+    }
+
+    // --- Expandable Card Click Logic ---
+    private fun setupExpandableCard(view: View) {
+        val headerArea = view.findViewById<View>(R.id.cardHeaderArea)
+        val expandableContainer = view.findViewById<View>(R.id.expandableActionContainer)
+        val ivChevron = view.findViewById<ImageView>(R.id.ivChevron)
+
+        headerArea.setOnClickListener {
+            if (expandableContainer.visibility == View.GONE) {
+                expandableContainer.visibility = View.VISIBLE
+                // Rotate chevron when open
+                ivChevron.rotation = 90f
+            } else {
+                expandableContainer.visibility = View.GONE
+                // Reset chevron rotation
+                ivChevron.rotation = 0f
+            }
+        }
     }
 
     private fun setupThemeToggle() {
-        // NOTE: You must add a TextView or Button with the ID 'btnToggleTheme' to your sidebar XML!
-        val btnToggleTheme = findViewById<TextView>(R.id.btnToggleTheme)
+        val navView = findViewById<NavigationView>(R.id.navView)
+        val btnToggleTheme = navView?.findViewById<TextView>(R.id.btnToggleTheme)
 
-        // Using a null check just in case you haven't added it to the XML yet to prevent crashes
         if (btnToggleTheme != null) {
-            // Set initial text
             btnToggleTheme.text = if (themeManager.isDarkMode()) "Switch to Light Mode" else "Switch to Dark Mode"
 
             btnToggleTheme.setOnClickListener {
                 val isCurrentlyDark = themeManager.isDarkMode()
-                // Flip the theme
                 themeManager.setDarkMode(!isCurrentlyDark)
-
-                // Close the drawer before recreating the activity to make it look smoother
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
         }
@@ -88,9 +113,19 @@ class AdminDashboardActivity : AppCompatActivity() {
 
     private fun setupUserManagement() {
         val module = findViewById<View>(R.id.cardUsers)
-        module.findViewById<TextView>(R.id.moduleTitle).text = "User Management"
-        module.findViewById<TextView>(R.id.moduleDesc).text = "Manage system access and roles."
 
+        // Text & Descriptions
+        module.findViewById<TextView>(R.id.moduleTitle).text = "User Management"
+        module.findViewById<TextView>(R.id.moduleDesc).text = "Add / Edit / Delete\nUsers & Assign Roles"
+
+        // Setup Badges
+        module.findViewById<TextView>(R.id.badge1).text = "24 ACTIVE"
+        module.findViewById<TextView>(R.id.badge2).text = "3 PENDING"
+
+        // Enable Expandable Logic
+        setupExpandableCard(module)
+
+        // Buttons
         val btnAdd = module.findViewById<Button>(R.id.btn1)
         btnAdd.text = "Add User"
         btnAdd.setOnClickListener {
@@ -103,24 +138,41 @@ class AdminDashboardActivity : AppCompatActivity() {
 
     private fun setupWorkOrders() {
         val module = findViewById<View>(R.id.cardOrders)
-        module.findViewById<TextView>(R.id.moduleTitle).text = "Work Orders"
-        module.findViewById<TextView>(R.id.moduleDesc).text = "Track manufacturing production."
 
-        val btnCreate = module.findViewById<Button>(R.id.btn1)
-        btnCreate.text = "Create Order"
-        // Ensure you change these hardcoded colors to your resource colors for Dark Mode to work optimally
-        btnCreate.setBackgroundColor(getColor(R.color.industrial_red))
-        btnCreate.setTextColor(getColor(R.color.text_primary))
+        module.findViewById<TextView>(R.id.moduleTitle).text = "Work Order Management"
+        module.findViewById<TextView>(R.id.moduleDesc).text = "Create / Edit /\nDelete Work Orders"
 
+        // Setup Badges
+        module.findViewById<TextView>(R.id.badge1).text = "6 ACTIVE"
+        val badge2 = module.findViewById<TextView>(R.id.badge2)
+        badge2.text = "2 DELAYED"
+        badge2.setTextColor(getColor(android.R.color.holo_orange_dark)) // Highlight warning
+
+        // Enable Expandable Logic
+        setupExpandableCard(module)
+
+        // Buttons
+        module.findViewById<Button>(R.id.btn1).text = "Create Order"
         module.findViewById<Button>(R.id.btn2).text = "Edit Order"
         module.findViewById<Button>(R.id.btn3).text = "Delete Order"
     }
 
     private fun setupReports() {
         val module = findViewById<View>(R.id.cardReportsModule)
-        module.findViewById<TextView>(R.id.moduleTitle).text = "Reports"
-        module.findViewById<TextView>(R.id.moduleDesc).text = "Production fulfillment analytics."
 
+        module.findViewById<TextView>(R.id.moduleTitle).text = "Reports"
+        module.findViewById<TextView>(R.id.moduleDesc).text = "View Production &\nWork Order Reports"
+
+        // Setup Badges
+        module.findViewById<TextView>(R.id.badge1).text = "74% TARGET"
+        val badge2 = module.findViewById<TextView>(R.id.badge2)
+        badge2.text = "ON TRACK"
+        badge2.setTextColor(getColor(android.R.color.holo_green_dark))
+
+        // Enable Expandable Logic
+        setupExpandableCard(module)
+
+        // Buttons
         module.findViewById<Button>(R.id.btn1).text = "Production Reports"
         module.findViewById<Button>(R.id.btn2).text = "Work Order Reports"
         module.findViewById<Button>(R.id.btn3).visibility = View.GONE

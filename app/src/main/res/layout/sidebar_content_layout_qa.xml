@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/app_background"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FDEAEA"
+        android:background="@color/card_background"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="24dp">
@@ -18,17 +18,29 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@android:drawable/checkbox_on_background"
-            app:tint="#D32F2F" />
+            app:tint="@color/industrial_red" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="Quality Assurance"
-            android:textColor="#212121"
+            android:textColor="@color/text_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: Active Duty"
+            android:textColor="#4CAF50"
+            android:textSize="12sp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingTop="8dp">
 
             <TextView
                 android:id="@+id/nav_pending_inspections"
@@ -62,6 +74,37 @@
                 android:drawablePadding="16dp"
                 android:text="NCR Summary" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="8dp"
+                android:background="#EEEEEE" />
+
+            <TextView
+                android:id="@+id/btnToggleTheme"
+                style="@style/SidebarItem"
+                android:drawableStart="@android:drawable/ic_menu_day"
+                android:drawablePadding="16dp"
+                android:text="Switch to Dark Mode" />
+
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/tvLogout"
+        style="@style/SidebarItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:drawableStart="@android:drawable/ic_menu_revert"
+        android:drawablePadding="16dp"
+        android:text="Logout"
+        android:textColor="@color/industrial_red"
+        android:textStyle="bold" />
+
 </LinearLayout>

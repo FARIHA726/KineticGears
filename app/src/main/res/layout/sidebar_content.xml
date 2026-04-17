@@ -8,10 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDE7E6"
+        android:background="@color/card_background"
         android:padding="15dp"
         android:text="Dashboard"
-        android:textColor="#B03A2E"
+        android:textColor="@color/industrial_red"
         android:textStyle="bold" />
 
     <TextView style="@style/SidebarItem" android:text="Inventory" />
@@ -25,14 +25,34 @@
         android:drawablePadding="16dp"
         android:text="Switch to Dark Mode" />
 
-    <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/tvLogout"
+        style="@style/SidebarItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:drawableStart="@android:drawable/ic_menu_revert"
+        android:drawablePadding="16dp"
+        android:text="Logout"
+        android:textColor="@color/industrial_red"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnSurveillance"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_margin="10dp"
-        android:backgroundTint="#B03A2E"
+        android:backgroundTint="@color/industrial_red"
         android:text="SURVEILLANCE"
         android:textColor="#FFFFFF" />
 

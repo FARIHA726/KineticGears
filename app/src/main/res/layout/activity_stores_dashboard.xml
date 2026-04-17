@@ -5,112 +5,202 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/app_background">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/headerBar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="#D32F2F"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:background="@color/industrial_red"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <ImageView
-                android:id="@+id/btnMenu"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerVertical="true"
-                android:src="@android:drawable/ic_menu_sort_by_size"
-                app:tint="#FFFFFF" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/btnMenu"
-                android:text="STORES DASHBOARD"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/btnHeaderCamera"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:layout_toStartOf="@id/tvLogout"
-                android:src="@android:drawable/ic_menu_camera"
-                app:tint="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/tvLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="LOGOUT"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:padding="8dp"/>
-        </RelativeLayout>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/headerBar">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
                 android:padding="16dp">
 
-                <include layout="@layout/view_dashboard_module"
-                    android:id="@+id/cardIssueMaterial"
-                    android:layout_width="320dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp" />
+                <ImageView
+                    android:id="@+id/btnMenu"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:tint="#FFFFFF" />
 
-                <include layout="@layout/view_dashboard_module"
-                    android:id="@+id/cardReceiveFG"
-                    android:layout_width="320dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <include layout="@layout/view_dashboard_module"
-                    android:id="@+id/cardTraceability"
-                    android:layout_width="320dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KINETICS GEARS"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inventory &amp; Logistics"
+                        android:textColor="#FFCDD2"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#B71C1C"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="STORES DASHBOARD"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/btnHeaderCamera"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:tint="#FFFFFF" />
+
+            </RelativeLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-40dp"
+                    android:elevation="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/card_background"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15" android:textColor="#F57C00" android:textSize="24sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="LOW STOCK" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/card_background"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8" android:textColor="@color/industrial_red" android:textSize="24sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PENDING" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/card_background"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1,240" android:textColor="@color/industrial_red" android:textSize="20sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SKUs" android:textColor="@color/text_secondary" android:textSize="10sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.1"
+                    android:text="MATERIAL HANDLING"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <include layout="@layout/view_dashboard_module" android:id="@+id/cardIssueMaterial" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp"/>
+
+                <include layout="@layout/view_dashboard_module" android:id="@+id/cardReceiveFG" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.1"
+                    android:text="AUDIT &amp; TRACKING"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <include layout="@layout/view_dashboard_module" android:id="@+id/cardTraceability" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp"/>
+
             </LinearLayout>
-        </HorizontalScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@android:drawable/stat_notify_chat"
-            app:backgroundTint="#D32F2F"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@color/industrial_red"
             app:tint="#FFFFFF" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
         android:layout_width="260dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        android:background="@color/app_background">
         <include layout="@layout/sidebar_content_layout_stores" />
     </com.google.android.material.navigation.NavigationView>
 
